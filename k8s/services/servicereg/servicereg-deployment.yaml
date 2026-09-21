@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicereg
+  labels:
+    app: servicereg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicereg
+  template:
+    metadata:
+      labels:
+        app: servicereg
+    spec:
+      containers:
+        - name: servicereg
+          image: wanijya/servicereg:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8761
