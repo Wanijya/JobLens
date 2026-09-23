@@ -69,6 +69,10 @@ services:
       - postgres
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   jobms:
     image: wanijya/jobms:latest
@@ -83,6 +87,10 @@ services:
       - postgres
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://servicereg:8761/eureka
       SPRING_CONFIG_IMPORT: optional:configserver:http://config-server-ms:8080
 
@@ -99,6 +107,10 @@ services:
       - postgres
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   rabbitmq:
     image: rabbitmq:4-management
