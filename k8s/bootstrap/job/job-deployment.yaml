@@ -21,6 +21,24 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
+
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+
+            - name: RABBITMQ_USERNAME
+              value: guest
+
+            - name: RABBITMQ_PASSWORD
+              value: guest
       restartPolicy: Always
   selector:
     matchLabels:

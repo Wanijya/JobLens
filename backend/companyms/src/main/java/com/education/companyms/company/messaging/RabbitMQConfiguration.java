@@ -13,7 +13,15 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Queue companyRatingQueue() {
-        return new Queue("companyRatingQueue");
+        return org.springframework.amqp.core.QueueBuilder.durable("companyRatingQueue")
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", "companyRatingQueue.dlq")
+                .build();
+    }
+
+    @Bean
+    public Queue dlq() {
+        return new org.springframework.amqp.core.Queue("companyRatingQueue.dlq");
     }
 
     @Bean
