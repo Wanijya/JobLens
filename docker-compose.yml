@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
 
   config-server-ms:
-    image: wanijya/config-server-ms:latest
+    image: wanijya/config-server-ms:v1.0.0
     container_name: config-server-ms
     ports:
       - "8080:8080"
@@ -43,7 +43,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
 
   servicereg:
-    image: wanijya/servicereg:latest
+    image: wanijya/servicereg:v1.0.0
     container_name: servicereg
     ports:
       - "8761:8761"
@@ -57,7 +57,7 @@ services:
       - postgres
 
   companyms:
-    image: wanijya/companyms:latest
+    image: wanijya/companyms:v1.0.0
     container_name: company
     ports:
       - "8081:8081"
@@ -75,7 +75,7 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
 
   jobms:
-    image: wanijya/jobms:latest
+    image: wanijya/jobms:v1.0.0
     container_name: job
     ports:
       - "8082:8082"
@@ -95,7 +95,7 @@ services:
       SPRING_CONFIG_IMPORT: optional:configserver:http://config-server-ms:8080
 
   reviewms:
-    image: wanijya/reviewms:latest
+    image: wanijya/reviewms:v1.0.0
     container_name: review
     ports:
       - "8083:8083"
@@ -135,7 +135,7 @@ services:
       - postgres
 
   gateway-ms:
-    image: wanijya/gateway-ms:latest
+    image: wanijya/gateway-ms:v1.0.0
     container_name: gateway
     ports:
       - "8084:8084"

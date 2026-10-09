@@ -14,10 +14,29 @@ spec:
     spec:
       containers:
         - name: review
-          image: wanijya/reviewms:latest
+          image: wanijya/reviewms:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8083
+            initialDelaySeconds: 45
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8083
+            initialDelaySeconds: 45
+            periodSeconds: 10
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
@@ -35,11 +54,19 @@ spec:
                   key: POSTGRES_PASSWORD
 
             - name: RABBITMQ_USERNAME
-              value: guest
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: RABBITMQ_USERNAME
 
             - name: RABBITMQ_PASSWORD
-              value: guest
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: RABBITMQ_PASSWORD
       restartPolicy: Always
   selector:
     matchLabels:
       app: review
+
+
